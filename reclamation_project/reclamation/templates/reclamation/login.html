@@ -3,25 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+     {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
 </head>
-<body>
- <form method="POST">
+<body class="bg-secondary">
+<div class="container-fluid">
+    <br>
+    <br>
+    <br>
+    <br>
+    <h2 class="text-center">Connecter-vous pour acceder a vos reclamations</h2>
+    <div class="row bg-gradient">
+        <div class="col-12 text-center" >
+            <form method="post" style="width:40%;margin:auto;" class="bg-gradient">
     {% csrf_token %}
     <div class="input-box">
     <div class="single-input-fields">
       <label>Nom d'utilisateur ou adresse e-mail</label>
-    <input type=" text" name="username" >
+    <input type=" text" name="username" class="form-control" >
     </div>
     <div class="single-input-fields">
       <label>Mot de passe</label>
-      <input type="password" name="password" id="" >
+      <input type="password" name="password" id="" class="form-control" >
       </div>
 
-    <button type="submit" class="btn login-btn">Login</button>
+    <button type="submit" class="btn btn-primary">Connexion</button>
   </div>
-  <div class="login-footer">
-  <p>vous n'avez pas de compte? <a href="">Inscrivez-vous</a> ici</p>
-  </div>
+            </form>
+            </div>
+    </div>
+</div>
 
 </body>
 </html>

@@ -18,13 +18,14 @@ from django.contrib import admin
 from django.urls import path
 
 
-from .views import register, create_reclamation, connexion, list_employee_reclamation
+from .views import register, create_reclamation, connexion, list_employee_reclamation, Deconnexion, list_reclamation
 
 urlpatterns = [
     path('', register, name='register'),
     path('connexion/', connexion, name='connexion'),
     path('create_claim/', create_reclamation, name='create_claim'),
-
-    path('liste/',list_employee_reclamation,name='liste')
+    path('deconnexion/',Deconnexion,name='deconnexion'),
+    path('liste/',list_employee_reclamation,name='liste'),
+    path('list_claim/',list_reclamation,name='list_claim')
 ]
 

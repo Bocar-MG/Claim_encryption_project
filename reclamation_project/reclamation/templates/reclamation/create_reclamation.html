@@ -3,16 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+
 </head>
 <body>
-<form method="POST">
-    {% csrf_token %}
-   {{ form.as_p }}
+<div class="container-fluid">
 
-    <input type="submit" value="Submit"/>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">ADBS</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+        <ul class="navbar-nav">
+            {% if user.is_authenticated  and user.role.Name == 'Employee'%}
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'deconnexion' %}">Se deconnecter</a>
+            </li>
+              <li class="nav-item active">
+                <p class="bg-black text-white">{{user.role.Name}}</p>
+            </li>
+            {% else %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'connexion' %}">Se connecter</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}">S'enregistrer</a>
+            </li>
+            {% endif %}
+        </ul>
+
+    </div>
+</nav>
+    <br>
+
+    <h2 class="text-center">Veuillez preciser vos reclamations ici</h2>
+    <div class="row bg-gradient">
+        <div class="col-12 text-center" >
+            <form method="post" style="width:40%;margin:auto;">
+    {% csrf_token %}
+     {% bootstrap_form formulaire show_help=False %}
+      {% buttons %}
+        <button type="submit" class="btn btn-primary">S'enregistrer</button>
+    {% endbuttons %}
 
 
 </form>
-   <a href="{% url 'liste' %}">Consulter la liste de vos reclamation</a>
+            <a href="{% url 'liste' %}" class="btn btn-info">Consulter la liste de vos reclamation</a>
+        </div>
+    </div>
+
+    </div>
+
+
 </body>
 </html>

@@ -1,18 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+     {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
 </head>
-<body>
-    {% for reclamation in list_reclamations %}
-        <h1> Titre: {{ reclamation.Titre }} </h1>
-        <p>  Description : {{ reclamation.Description }} </p>
-        <p>  Date : {{ reclamation.Date }} </p>
-          <p>  Nom : {{ reclamation.user.first_name }} </p>
-           <p> Poste : {{ reclamation.user.PosteOccupe }} </p>
-           <p>  Grade : {{ reclamation.user.Grade }} </p>
-    {% endfor %}
+<body style="background:url('{% static 'images/adsb.jpg' %}') no-repeat fixed; background-size:cover;">
 
+<div class="container-fluid">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">ADBS</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+        <ul class="navbar-nav">
+            {% if user.is_authenticated and user.role.Name == 'Directeur' %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'deconnexion' %}">Se deconnecter</a>
+            </li>
+             <li class="nav-item active">
+                <p class="bg-black text-white">{{user.role.Name}}</p>
+            </li>
+
+            {% else %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'connexion' %}">Se connecter</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}">S'enregistrer</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+    <br>
+
+    <h2 class="text-center">Vos reclamations</h2>
+    <div class="row bg-gradient">
+        <div class="col-12 text-center" >
+            <table class="table text-white bg-info">
+                    <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Titre</th>
+      <th scope="col">Description</th>
+         <th scope="col">Nom</th>
+         <th scope="col">Prenom</th>
+         <th scope="col">Telephone</th>
+         <th scope="col">Grade</th>
+         <th scope="col">PosteOccupe</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+
+
+                {% for reclamation in list_reclamations %}
+                <tbody>
+                <tr>
+                      <td>{{ reclamation.id}}</td>
+                    <td>{{ reclamation.Titre }}</td>
+                    <td>{{ reclamation.Description }}</td>
+                     <td>{{ reclamation.user.first_name }}</td>
+                     <td>{{ reclamation.user.last_name }}</td>
+                     <td>{{ reclamation.user.Telephone}}</td>
+                     <td>{{ reclamation.user.Grade}}</td>
+                     <td>{{ reclamation.user.PosteOccupe }}</td>
+                    <td>{{ reclamation.Date }}</td>
+
+                </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+
+    </div>
 </body>
 </html>
