@@ -24,6 +24,8 @@ SECRET_KEY = 'django-insecure-&r&(x7tlg1^g#-9@na=(kze!4)r%tjmv6$5#%h^5o05+v95&77
 
 key = b'\x9d+\xdd4\xf2\xa3\xac\x08\xe3\x83+\xdd\td\xec\xe5\xb4\x99T\x8d\x9c@\x87\x98\x8f\xc3\xfd\xdd\x9bx3\xc8'
 vector_inis= b'\xdd\xaa)\x80\xb3\xa7\x93xvYz\xea-+\x98\xb1'
+
+ENCRYPT_KEY = b'20eWUaBz5Etk1WVIVAEEKj8t5UclC-qdK2f28YpIs-I='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 

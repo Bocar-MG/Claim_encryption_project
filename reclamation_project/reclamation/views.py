@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
-from .keys import chiffrage_msg, dechiffrage_msg
+from .keys import chiffrage_msg, dechiffrage_msg, encrypt, decrypt
 
 from .forms import ReclamationForm, CustomUserRegistrationForm, AuthenticationUserForm, ReclamationDechiffrerForm
 
@@ -27,9 +27,6 @@ def register(request):
     else:
         form = CustomUserRegistrationForm()
     return render(request, 'reclamation/registration.html', {'form': form})
-
-
-
 
 
 def connexion(request):
@@ -56,13 +53,14 @@ def create_reclamation(request):
             if form.is_valid():
                 reclamation = form.save(commit=False)
                 reclamation.user = request.user
-                reclamation.Titre = chiffrage_msg(reclamation.Titre)
-                reclamation.Description = chiffrage_msg(reclamation.Description)
+                # reclamation.Titre = chiffrage_msg(reclamation.Titre)
+                # reclamation.Description = chiffrage_msg(reclamation.Description)
+                reclamation.Titre = encrypt(reclamation.Titre)
+                reclamation.Description = encrypt(reclamation.Description)
                 reclamation.save()
         else:
             form = ReclamationForm
-        return render(request, 'reclamation/create_reclamation.html',{'form':form})
-
+        return render(request, 'reclamation/create_reclamation.html', {'form': form})
 
 
 '''
@@ -82,21 +80,13 @@ def list_reclamation(request):
         return render(request, 'reclamation/directeur_interface.html', {'list_reclamations': list_reclamations})
 '''
 
+
 @login_required
 def list_employee_reclamation(request):
     if request.user.is_authenticated and request.user.role.Name == "Employee":
         list_reclamations_employee = Reclamation.objects.filter(user=request.user)
-
         for reclamation in list_reclamations_employee:
-            lenchaine = len(reclamation.Titre)
-            print(chiffrage_msg(reclamation.Titre))
-            print(dechiffrage_msg(chiffrage_msg(reclamation.Titre)))
-
-
-
-
-
-
-
+            reclamation.Titre = decrypt(reclamation.Titre)
+            reclamation.Description = decrypt(reclamation.Description)
 
         return render(request, 'reclamation/list_employee_reclamation.html', {'listes': list_reclamations_employee})
