@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% for reclamation in list_reclamations %}
+        <h1> Titre: {{ reclamation.Titre }} </h1>
+        <p>  Description : {{ reclamation.Description }} </p>
+        <p>  Date : {{ reclamation.Date }} </p>
+          <p>  Nom : {{ reclamation.user.first_name }} </p>
+           <p> Poste : {{ reclamation.user.PosteOccupe }} </p>
+           <p>  Grade : {{ reclamation.user.Grade }} </p>
+    {% endfor %}
+
+</body>
+</html>

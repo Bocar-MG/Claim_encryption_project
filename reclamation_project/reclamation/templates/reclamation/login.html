@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ <form method="POST">
+    {% csrf_token %}
+    <div class="input-box">
+    <div class="single-input-fields">
+      <label>Nom d'utilisateur ou adresse e-mail</label>
+    <input type=" text" name="username" >
+    </div>
+    <div class="single-input-fields">
+      <label>Mot de passe</label>
+      <input type="password" name="password" id="" >
+      </div>
+
+    <button type="submit" class="btn login-btn">Login</button>
+  </div>
+  <div class="login-footer">
+  <p>vous n'avez pas de compte? <a href="">Inscrivez-vous</a> ici</p>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+     {% for reclamation in listes %}
+         <h1> Titre: {{ reclamation.Titre }} </h1>
+        <p>  Description : {{ reclamation.Description }} </p>
+        <p>  Date : {{ reclamation.Date }} </p>
+     {% endfor %}
+  <a href="{% url 'create_claim' %}"></a>
+</body>
+</html>
