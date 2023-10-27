@@ -27,6 +27,7 @@ def dechiffrage_msg(msg, key=settings.key, vector_inis=settings.vector_inis):
     return message_decrypted.decode()
 
 
+
 def encrypt(cleartext):
     key = settings.ENCRYPT_KEY
     f = fernet.Fernet(key)
