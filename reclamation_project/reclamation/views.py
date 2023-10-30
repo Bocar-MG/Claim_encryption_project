@@ -77,7 +77,7 @@ def list_reclamation(request):
             except InvalidToken:
                 print("Invalid key - Unsuccessfully decrypted")
 
-        return render(request, 'reclamation/directeur_interface.html', {'list_reclamations': list_reclamations})
+        return render(request, 'reclamation/responsable_reclamation.html', {'list_reclamations': list_reclamations})
 
 
 
